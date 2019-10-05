@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
+# translation.py
+from reverse_complement import ReverseComplement
 
 class Translation:
-    DNAcodon = {
+    DNA_codon = {
         "AAA" : "K", "AAC" : "N", "AAG" : "K", "AAT" : "N",
         "ACA" : "T", "ACC" : "T", "ACG" : "T", "ACT" : "T",
         "AGA" : "R", "AGC" : "S", "AGG" : "R", "AGT" : "S",
@@ -21,10 +23,9 @@ class Translation:
         "TTA" : "L", "TTC" : "F", "TTG" : "L", "TTT" : "F"  
     }
     chunk_size = 3
-    line_size = 90
 
     def __init__(self, sequence):
-        self.sequence = sequence
+        self.sequence = sequence.upper()
         self.chunks = len(sequence)
 
     def proteinTranslation(self):
@@ -33,24 +34,21 @@ class Translation:
         for dna in seq_list:
             if len(dna) < 3:
                 break
-            protein += self.DNAcodon[dna]
-        # re_list = [protein[i:i+self.line_size] for i in range(0, len(protein), self.line_size)]
-        # return '\n'.join(re_list)
+            if 'N' in dna:
+                protein += 'X'
+                continue
+            protein += self.DNA_codon[dna]
         return protein
 
 if __name__ == '__main__':
-    f = open('test.sec', 'r')
+    f = open('input.fasta', 'r')
     lines = f.readlines()
     seq = ''.join(lines[1:]).replace('\n', '')
 
-    print('> frame 1')
-    translator = Translation(seq)
-    print(translator.proteinTranslation())
-
-    print('> frame 2')
-    translator = Translation(seq[1:])
-    print(translator.proteinTranslation())
-
-    print('> frame 3')
-    translator = Translation(seq[2:])
-    print(translator.proteinTranslation())
+    test = ReverseComplement(seq)
+    test.fillAll6()
+    for key in test.frame_6_set:
+        print('>', key)
+        re = Translation(test.frame_6_set[key]).proteinTranslation()
+        print(re)
+        
