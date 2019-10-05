@@ -43,8 +43,9 @@ class ReverseComplement:
         self.frame_6_set['Frame +3'] = self.sequence[2:]
         rc_version = self.reverseComplement()
         self.frame_6_set['Frame -1'] = rc_version
-        self.frame_6_set['Frame -3'] = rc_version[1:]
-        self.frame_6_set['Frame -2'] = rc_version[2:]
+        self.frame_6_set['Frame -2'] = rc_version[1:]
+        self.frame_6_set['Frame -3'] = rc_version[2:]
+        return self.frame_6_set
 
 if __name__ == "__main__":
     f = open('input.fasta', 'r')

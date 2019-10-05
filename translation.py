@@ -29,16 +29,16 @@ class Translation:
         self.chunks = len(sequence)
 
     def proteinTranslation(self):
-        protein = ''
+        amino_acids = ''
         seq_list = [self.sequence[i:i+self.chunk_size] for i in range(0, self.chunks, self.chunk_size)]
         for dna in seq_list:
             if len(dna) < 3:
                 break
             if 'N' in dna:
-                protein += 'X'
+                amino_acids += 'X'
                 continue
-            protein += self.DNA_codon[dna]
-        return protein
+            amino_acids += self.DNA_codon[dna]
+        return amino_acids
 
 if __name__ == '__main__':
     f = open('input.fasta', 'r')
