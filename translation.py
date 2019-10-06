@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 # translation.py
-from reverse_complement import ReverseComplement
 
 class Translation:
     DNA_codon = {
@@ -41,14 +40,7 @@ class Translation:
         return amino_acids
 
 if __name__ == '__main__':
-    f = open('input.fasta', 'r')
+    f = open('./test_data/input.fasta', 'r')
     lines = f.readlines()
     seq = ''.join(lines[1:]).replace('\n', '')
-
-    test = ReverseComplement(seq)
-    test.fillAll6()
-    for key in test.frame_6_set:
-        print('>', key)
-        re = Translation(test.frame_6_set[key]).proteinTranslation()
-        print(re)
-        
+    print(Translation(seq).proteinTranslation())
