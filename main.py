@@ -1,3 +1,7 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+# main.py & main entrance
+
 import argparse
 from reverse_complement import ReverseComplement
 from translation import Translation
